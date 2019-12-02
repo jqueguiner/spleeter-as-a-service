@@ -1,0 +1,72 @@
+openapi: 3.0.1
+info:
+  description: This API will separate source from an audio file spliting Vocals / drums / bass / piano and more.
+
+  version: 1.0.0
+  title: Song source Separation (Spleeter)
+  termsOfService: 'https://market-place.ai.ovh.net/#!/cgu-en'
+  contact:
+    name: API Support
+    url: 'https://gitter.im/ovh/ai'
+  license:
+    name: MIT
+    url: 'https://github.com/jqueguiner/spleeter-as-a-service/LICENSE'
+tags:
+  - name: process
+    description: Split Vocals / drums / bass / piano and more
+    externalDocs:
+      description: Find out more
+      url: 'https://bit.ly/2MEIDoe'
+paths:
+  /process:
+    post:
+      security:
+        - apikey: []
+      tags:
+        - process
+      summary: Split Vocals / drums / bass / piano and more
+      description: Split Vocals / drums / bass / piano and more
+      operationId: process
+      responses:
+        '200':
+          description: OK
+          content:
+            text:
+              schema:
+                type: string
+        '400':
+          description: 'input error, the text might contain more than 1 mask'
+        '401':
+          description: Unauthorized
+        '500':
+          description: make sure your API request is written correctly espacially with the appropriate double quote escape
+      requestBody:
+        description: Fill your french text mask with suggestions
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body'
+components:
+  securitySchemes:
+    apikey:
+      type: apiKey
+      name: X-OVH-Api-Key
+      in: header
+  schemas:
+    Body:
+      type: object
+      required:
+        - text
+        - top_k
+      properties:
+        url:
+          type: string
+          description: url of the audio file to split
+          example: 'https://github.com/deezer/spleeter/raw/master/audio_example.mp3'
+        nb_stems:
+          type: integer
+          description: "2 stems : Vocals (singing voice) / accompaniment separation <br>
+          4 stems : Vocals / drums / bass / other separation <br>
+          5 stems : Vocals / drums / bass / piano / other separation "
+          example: 2
