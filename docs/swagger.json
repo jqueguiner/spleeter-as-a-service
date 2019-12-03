@@ -41,12 +41,8 @@
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "text": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "file"
             }
           },
           "400": {
@@ -85,8 +81,8 @@
       "Body": {
         "type": "object",
         "required": [
-          "text",
-          "top_k"
+          "url",
+          "nb_stems"
         ],
         "properties": {
           "url": {
