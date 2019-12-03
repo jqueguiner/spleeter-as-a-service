@@ -81,18 +81,15 @@ def process():
 
         result = separator.separate(waveform)
 
-        instruments = []
+        zip = ZipFile(zip_output_path + '.zip', 'w')
+        
         for instrument, data in result.items():
             save_audio(output_path, instrument, data, rate)
-            instruments.append(instrument)
-
-        with ZipFile(zip_output_path, 'w') as zip:
-            print(output_path)
             for (root,dirs,files) in os.walk(output_path):
-                for file in files:
-                    print(file)
-                    zip.write(output_path + '/' + file, basename(file))
-
+                with ZipFile(zip_output_path, 'w') as zip:
+                    for file in files:
+                        print(file)
+                        zip.write(output_path + '/' + file, basename(file))
 
         callback = send_file(zip_output_path, mimetype='application/zip')
 
