@@ -13,4 +13,8 @@ RUN pip install musdb museval
 RUN pip install spleeter-gpu==1.4.5
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["/bin/bash"]
+EXPOSE 5000
+
+ENTRYPOINT ["python"]
+
+CMD ["app.py"]
