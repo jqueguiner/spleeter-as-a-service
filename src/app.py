@@ -124,7 +124,7 @@ if __name__ == '__main__':
     create_directory(model_directory)
     
 
-    model_url_prefix = 'http://pretrained-models.auth-18b62333a540498882ff446ab602528b.storage.gra5.cloud.ovh.net/sound/spleeter/'
+    model_url_prefix = 'http://pretrained-models.auth-18b62333a540498882ff446ab602528b.storage.gra.cloud.ovh.net/sound/spleeter/'
 
     separators = dict()
 
